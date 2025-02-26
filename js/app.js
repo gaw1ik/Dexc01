@@ -326,6 +326,8 @@ async function setup() {
     setInterval(updateTicker,TIME);
     // setInterval(updateTicker,250);
 
+    // setInterval(adjustNoise,34);
+
 
     // setTimeout(play_bass01, 1000);
 
@@ -336,6 +338,14 @@ async function setup() {
 
 
 }
+
+
+// function adjustNoise() {
+
+//     let gain = r2n(averagePercentDelta,0.005,0.050);
+//     device.parametersById.get("pink_gain").value = gain;
+
+// }
 
 
 

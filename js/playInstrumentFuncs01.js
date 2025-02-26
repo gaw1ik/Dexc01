@@ -179,10 +179,23 @@ CoinValue = CoinValueOld;
 CoinDelta = 0;
 Count = 0;
 degnew = 1;
+averageDelta = 0;
+averagePercentDelta = 0;
+deltaTrigger01 = 0.00005;
+percentTrigger01 = deltaTrigger01*100;
 
 tickerText = document.getElementById("tickerText");
 
 deltaFrom0_MA = [0,0,0,0,0,0,0,0];
+
+CoinValue_MA = [];
+for(let i=0;i<32;i++) {
+    CoinValue_MA.push(CoinValue0);
+}
+// CoinValue_MA = [CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0];
+// CoinValue_MA = [CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0];
+
+
 
 function updateTicker() {
 
@@ -205,7 +218,7 @@ function updateTicker() {
 
 
     deltaFrom0 = (CoinValue-CoinValue0)/CoinValue0;
-    deltaTrigger01 = 0.0005;
+
 
     percentFrom0 = deltaFrom0*100;
     percentFrom0Abs = Math.abs(percentFrom0);
@@ -225,39 +238,38 @@ function updateTicker() {
     averagePercentDelta = averageDelta*100;
     averagePercentDeltaAbs = Math.abs(averagePercentDelta);
 
+    CoinValue_MA = CoinValue_MA.slice(1);
+    CoinValue_MA.push(CoinValue);
+    // console.log("deltaFrom0_MA",deltaFrom0_MA);
+    average_CoinValue = average(CoinValue_MA);
+
 
     // console.log("averageDelta",averageDelta);
 
-    if(percentFrom0<0) {
+    if(averagePercentDelta<-percentTrigger01) {
         tickerText.style.color = 'hsl(0,50%,50%)';
         tickerText.innerText = 'BTCUSD $' + CoinValue.toFixed(1) + " - " + averagePercentDeltaAbs.toFixed(3) + "%";
-    } else {
+    } else if (averagePercentDelta>percentTrigger01) {
         tickerText.style.color = 'hsl(130,50%,50%)';
+        tickerText.innerText = 'BTCUSD $' + CoinValue.toFixed(1) + " + " + averagePercentDeltaAbs.toFixed(3) + "%";
+    } else {
+        tickerText.style.color = 'hsl(130,0%,50%)';
         tickerText.innerText = 'BTCUSD $' + CoinValue.toFixed(1) + " + " + averagePercentDeltaAbs.toFixed(3) + "%";
     }
 
 
 
-    if ( deltaFrom0>deltaTrigger01 ) {
-        CoinValue0 = CoinValue; // reset
-        // degnew = degnew + 1;
-        playUp(deltaFrom0);
-    } else if (deltaFrom0<-deltaTrigger01) {
-        CoinValue0 = CoinValue; // reset
-        // degnew = degnew - 1;
-        playDown(deltaFrom0);
-    } else {
-        //
-    }
-
-    //// CLICKS
-    if(Count%(F)==0) {
-        device.parametersById.get("monosynth02_gain").value = 0.50;
-        play_monoSynth02();
-    } else if (Count%(F)==2) {
-        // device.parametersById.get("monosynth02_gain").value = 0.10;
-        // play_monoSynth02();
-    }
+    // if ( deltaFrom0>deltaTrigger01 ) {
+    //     CoinValue0 = CoinValue; // reset
+    //     // degnew = degnew + 1;
+    //     playUp(deltaFrom0);
+    // } else if (deltaFrom0<-deltaTrigger01) {
+    //     CoinValue0 = CoinValue; // reset
+    //     // degnew = degnew - 1;
+    //     playDown(deltaFrom0);
+    // } else {
+    //     //
+    // }
 
 
     if(CoinDelta>0) {
@@ -268,6 +280,26 @@ function updateTicker() {
         dir = 0;
     }
 
+    //// CLICKS
+    if(Count%(F)==0) {
+        device.parametersById.get("monosynth02_gain").value = 0.50;
+
+        let ms01osc = 3;
+        if(dir=1) {
+            ms01osc = 3;
+        } else {
+            ms01osc = 4;
+        }
+        device.parametersById.get("monosynth02_osc").value = ms01osc;
+
+        play_monoSynth02();
+    } else if (Count%(F)==2) {
+        // device.parametersById.get("monosynth02_gain").value = 0.10;
+        // play_monoSynth02();
+    }
+
+
+
     if(Count%F==0) {
         let chord = [];
         // if(dir==1) {
@@ -276,29 +308,37 @@ function updateTicker() {
         //     chord = [-3, -1, 1];
         // }
 
-        let octish;
-        if(dir==1) {
-            octish = 1;
-        } else if (dir==-1) {
-            octish = -1;
-        } else {
-            octish = 0;
+        let octish = 0;
+        if(averagePercentDelta>percentTrigger01) {
+            octish = 1; 
+        } else if (averagePercentDelta<-percentTrigger01){
+            octish = -1; 
         }
+        // if(dir==1) {
+        //     octish = 1;
+        // } else if (dir==-1) {
+        //     octish = -1;
+        // } else {
+        //     octish = 0;
+        // }
         let deg = chooseFromArray(chord);
 
         deg = deg + octish*7;
 
         // device.parametersById.get("polysynth01_oct").value = chooseFromArray([0.5, 1.0]);
 
-        playNote_ps01(deg);
+        if(averagePercentDeltaAbs>percentTrigger01){
+            playNote_ps01(deg);
+
+        }
 
     }
 
     if(Count%(F*4)==0) {
         let deg = 1;
-        if(averagePercentDelta>0.005) {
+        if(averagePercentDelta>percentTrigger01) {
             deg=4; 
-        } else if (averagePercentDelta<-0.005){
+        } else if (averagePercentDelta<-percentTrigger01){
             deg=-1; 
         }
         playNote_b01(deg);
@@ -349,6 +389,14 @@ function updateTicker() {
     }
 
     Count = Count + 1;
+
+    // if(Count%(F)==0) {
+    //     drawVisualizer();
+    // }
+
+ 
+
+    CoinValue0 = average_CoinValue;
 
 }
 

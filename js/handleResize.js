@@ -2,24 +2,24 @@ function handleResize() {
 
     console.log("resize");
 
-    window_innerWidth = window.innerWidth;
-    window_innerHeight = window.innerHeight;
+    // window_innerWidth = window.innerWidth;
+    // window_innerHeight = window.innerHeight;
 
     // siteContainer = document.getElementById("siteContainer");
     // siteContainer.style.height = window_innerHeight + "px";
 
 
 
-    // canvasViz01.width  = canvasViz01.clientWidth  * 2;
-    // canvasViz01.height = canvasViz01.clientHeight * 2;
+    canvasViz01.width  = canvasViz01.clientWidth  * 2;
+    canvasViz01.height = canvasViz01.clientHeight * 2;
 
 
 
 
-    var WIDTHSTYLE = 150;
-    var HEIGHTSTYLE = WIDTHSTYLE*0.7;
-    var WIDTH = WIDTHSTYLE*2;
-    var HEIGHT = HEIGHTSTYLE*2;
+    // var WIDTHSTYLE = 150;
+    // var HEIGHTSTYLE = WIDTHSTYLE*0.7;
+    // var WIDTH = WIDTHSTYLE*2;
+    // var HEIGHT = HEIGHTSTYLE*2;
 
     // for(let i=0; i<canvases.length; i++) {
 
