@@ -23,7 +23,7 @@ function drawVisualizer() {
         let yNew = r2n(CoinValue,91500,92500)*0.5 + 0.5;
         let lw = 0.002;
 
-        PATH.push([0.3,yNew]);
+        PATH.push([0.1,yNew]);
 
 
         for(let i=0; i<PATH.length; i++) {

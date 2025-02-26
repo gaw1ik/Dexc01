@@ -40,9 +40,10 @@ html, body {
 
 
 #tickerText{
-    font-size:4rem;
+    font-size:6vh;
     text-align:left;
     width:105vh;
+    margin-left:2vw;
 }
 
 #canvasViz01 {
@@ -113,3 +114,13 @@ h4 {
 
 
 
+@media only screen and (max-aspect-ratio: 0.99) {
+
+
+    #tickerText{
+        font-size:5vw;
+        text-align:left;
+        width:105vh;
+    }
+
+}

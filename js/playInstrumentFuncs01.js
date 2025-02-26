@@ -282,7 +282,7 @@ function updateTicker() {
 
     //// CLICKS
     if(Count%(F)==0) {
-        device.parametersById.get("monosynth02_gain").value = 0.50;
+        // device.parametersById.get("monosynth02_gain").value = 0.50;
 
         let ms01osc = 3;
         if(dir=1) {

@@ -44,7 +44,7 @@ function setupParams() {
     device.parametersById.get("monosynth02_decay").value = 20;
     device.parametersById.get("monosynth02_shape").value = 1;
     device.parametersById.get("monosynth02_decCurve").value = 2;
-    device.parametersById.get("monosynth02_gain").value = 0.50;
+    device.parametersById.get("monosynth02_gain").value = 0.05;
     device.parametersById.get("monosynth02_osc").value = 3;
     device.parametersById.get("monosynth02_pan").value = 0.6;
 
@@ -73,7 +73,7 @@ function setupParams() {
 
 
     // PINK NOISE
-    device.parametersById.get("pink_gain").value = 0.03;
+    device.parametersById.get("pink_gain").value = 0.005;
 
 
     // MASTER
