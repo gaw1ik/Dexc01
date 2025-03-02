@@ -3,273 +3,25 @@
 
 
 
-// monosynth02_deg = 1;
-// bass01_count = 0;
-// monoSampler01_count = 0;
-// polySampler01_count = 0;
-// PERC = 60;
-// TIME = 800;
 
 
 
 
 
+dir_stream = [0,0,0];
 
-// deg_ms01 = 1;
 
-// function play_monoSynth01() {
+function playInstruments() {
 
-//     monoSampler01_count = monoSampler01_count+1;
-//     // console.log("monoSampler01_count",monoSampler01_count)
 
-//     if(monoSampler01_count>4) {
-//         device.parametersById.get("monoSampler01_oct").value = chooseFromArray([0.5,1]);
-//         monoSampler01_count = 0;
-//         // console.log("monoSampler01_oct",device.parametersById.get("monoSampler01_oct").value)
+    COUNTMOD = COUNT%32;
+    QN = Math.floor(COUNTMOD/4) + 1;
+    BAR = Math.floor(COUNT/32);
+    BARMOD = BAR%4 + 1;
+    countText.innerText = BARMOD + '.' + QN + '.' + COUNTMOD;
 
-//     }
 
-//     if(makeChoice(PROB)) {
-//         let wait = getRandomInt(0,100);
-//         deg_ms01 = chooseFromArray([-4, -2, -1, 1, 2, 3, 5]);
-//         setTimeout(playNote_ms01,wait);
 
-//         if(makeChoice(40)) {
-//             setTimeout(decrement_monoSampler01, TIME*chooseFromArray([0.25,0.125]) );
-//         }
-//     }
-
-//     setTimeout(play_monoSynth01, TIME);
-// };
-
-
-// function playNote_ms01() {
-//     device.parametersById.get("monoSampler01_deg").value = deg_ms01;
-// }
-
-
-// function decrement_monoSampler01() {
-
-//     // device.parametersById.get("monoSampler01_deg").value = device.parametersById.get("monoSampler01_deg").value + randomSign();
-
-//     deg_ms01 = device.parametersById.get("monoSampler01_deg").value + randomSign();
-//     let wait = getRandomInt(0,100);
-//     setTimeout(playNote_ms01,wait);
-
-//     if(makeChoice(PERC)) {
-//         return;
-//     }
-
-//     setTimeout(decrement_monoSampler01,TIME*chooseFromArray([0.25,0.125]));
-    
-// }
-
-
-
-// deg_ps01 = 1;
-
-// function play_polySampler01() {
-
-//     // console.log("[b01,ms01,ps01]",
-//     //     device.parametersById.get("bass01_oct").value.toFixed(2),
-//     //     device.parametersById.get("monoSampler01_oct").value.toFixed(2),
-//     //     device.parametersById.get("polySampler01_oct").value.toFixed(2)
-//     // );
-
-//     polySampler01_count = polySampler01_count+1;
-
-//     if(polySampler01_count>4) {
-//         device.parametersById.get("polySampler01_oct").value = chooseFromArray([1,2]);
-//         polySampler01_count = 0;
-
-//     }
-
-//     if(makeChoice(PROB)) {
-//         let wait = getRandomInt(0,100);
-//         deg_ps1 = chooseFromArray([-4, -2, -1, 1, 2, 3, 5]);
-//         setTimeout(playNote_ps01,wait);
-
-//         if(makeChoice(40)) {
-//             setTimeout(decrement_polySampler01, TIME*chooseFromArray([0.25,0.125]) );
-//         }
-//     }
-
-//     setTimeout(play_polySampler01, TIME);
-// };
-
-
-// function playNote_ps01() {
-//     device.parametersById.get("polySampler01_deg").value = deg_ps01;
-// }
-
-
-// function decrement_polySampler01() {
-
-//     // device.parametersById.get("monoSampler01_deg").value = device.parametersById.get("monoSampler01_deg").value + randomSign();
-
-//     deg_ps01 = deg_ps01 + randomSign();
-//     let wait = getRandomInt(0,100);
-//     setTimeout(playNote_ps01,wait);
-
-//     if(makeChoice(PERC)) {
-//         return;
-//     }
-
-//     setTimeout(decrement_polySampler01,TIME*chooseFromArray([0.25,0.125]));
-    
-// }
-
-
-
-
-
-// deg_b01 = 1;
-
-// function play_bass01() {
-
-//     // console.log("bass01_oct",device.parametersById.get("bass01_oct").value)
-
-
-//     bass01_count = bass01_count+1;
-//     if(bass01_count>4) {
-//         device.parametersById.get("bass01_oct").value = chooseFromArray([0.25,0.5]);
-//         bass01_count = 0;
-//     }
-
-//     // octave dependent gain
-//     let oct = device.parametersById.get("bass01_oct").value;
-//     if(oct==0.5) {
-//         device.parametersById.get("bass01_gain").value = bass01_gain0/2;
-//     } else {
-//         device.parametersById.get("bass01_gain").value = bass01_gain0;
-//     }
-
-//     if(makeChoice(PROB)) {
-//         deg_b01 = chooseFromArray([1, -1, -3]);
-//         let wait = getRandomInt(0,100);
-//         setTimeout(playNote_b01,wait);
-//     }
-
-//     setTimeout(play_bass01,TIME*3);
-// }
-
-
-// function playNote_b01() {
-//     device.parametersById.get("bass01_deg").value = deg_b01;
-// }
-
-
-// function average(arr) {
-//     const sum = arr.reduce((acc, val) => acc + val, 0);
-//     return sum / arr.length;
-//   }
-
-function average(arr) {
-    let sum = 0;
-    for(let i=0;i<arr.length;i++) {
-        sum = sum + arr[i];
-    }
-    return sum / arr.length;
-}
-
-
-CoinValue0 = 92000; // starting coin value when site is opened
-CoinValueOld = CoinValue0;
-CoinValue = CoinValueOld;
-CoinDelta = 0;
-Count = 0;
-degnew = 1;
-averageDelta = 0;
-averagePercentDelta = 0;
-deltaTrigger01 = 0.00005;
-percentTrigger01 = deltaTrigger01*100;
-
-tickerText = document.getElementById("tickerText");
-
-deltaFrom0_MA = [0,0,0,0,0,0,0,0];
-
-CoinValue_MA = [];
-for(let i=0;i<32;i++) {
-    CoinValue_MA.push(CoinValue0);
-}
-// CoinValue_MA = [CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0];
-// CoinValue_MA = [CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0,CoinValue0];
-
-
-
-function updateTicker() {
-
-    
-
-    if(Count%F==0) {
-        CoinDelta = getRandomFloat(-20,20);
-        CoinValue = CoinValue + CoinDelta; 
-        tickerText.innerText = 'BTCUSD $' + CoinValue.toFixed(1);
-    }
-
-    // if(CoinDelta>0) {
-    //     tickerText.style.color = 'hsl(130,50%,50%)';
-    // } else if(CoinDelta<0) {
-    //     tickerText.style.color = 'hsl(0,50%,50%)';
-    // } else {
-    //     tickerText.style.color = 'hsl(0,0%,50%)';
-    // }
-
-
-
-    deltaFrom0 = (CoinValue-CoinValue0)/CoinValue0;
-
-
-    percentFrom0 = deltaFrom0*100;
-    percentFrom0Abs = Math.abs(percentFrom0);
-
-    // if ( deltaFrom0>deltaTrigger01 ) {
-    //     tickerText.innerText = 'BTCUSD $' + CoinValue.toFixed(1) + " " + percentFrom0.toFixed(2) + "%";
-    // } else if (deltaFrom0<-deltaTrigger01) {
-    //     tickerText.innerText = 'BTCUSD $' + CoinValue.toFixed(1) + " " + percentFrom0.toFixed(2) + "%";
-    // } else {
-    //     //
-    // }
-
-    deltaFrom0_MA = deltaFrom0_MA.slice(1);
-    deltaFrom0_MA.push(deltaFrom0);
-    // console.log("deltaFrom0_MA",deltaFrom0_MA);
-    averageDelta = average(deltaFrom0_MA);
-    averagePercentDelta = averageDelta*100;
-    averagePercentDeltaAbs = Math.abs(averagePercentDelta);
-
-    CoinValue_MA = CoinValue_MA.slice(1);
-    CoinValue_MA.push(CoinValue);
-    // console.log("deltaFrom0_MA",deltaFrom0_MA);
-    average_CoinValue = average(CoinValue_MA);
-
-
-    // console.log("averageDelta",averageDelta);
-
-    if(averagePercentDelta<-percentTrigger01) {
-        tickerText.style.color = 'hsl(0,50%,50%)';
-        tickerText.innerText = 'BTCUSD $' + CoinValue.toFixed(1) + " - " + averagePercentDeltaAbs.toFixed(3) + "%";
-    } else if (averagePercentDelta>percentTrigger01) {
-        tickerText.style.color = 'hsl(130,50%,50%)';
-        tickerText.innerText = 'BTCUSD $' + CoinValue.toFixed(1) + " + " + averagePercentDeltaAbs.toFixed(3) + "%";
-    } else {
-        tickerText.style.color = 'hsl(130,0%,50%)';
-        tickerText.innerText = 'BTCUSD $' + CoinValue.toFixed(1) + " + " + averagePercentDeltaAbs.toFixed(3) + "%";
-    }
-
-
-
-    // if ( deltaFrom0>deltaTrigger01 ) {
-    //     CoinValue0 = CoinValue; // reset
-    //     // degnew = degnew + 1;
-    //     playUp(deltaFrom0);
-    // } else if (deltaFrom0<-deltaTrigger01) {
-    //     CoinValue0 = CoinValue; // reset
-    //     // degnew = degnew - 1;
-    //     playDown(deltaFrom0);
-    // } else {
-    //     //
-    // }
 
 
     if(CoinDelta>0) {
@@ -280,247 +32,285 @@ function updateTicker() {
         dir = 0;
     }
 
-    //// CLICKS
-    if(Count%(F)==0) {
-        // device.parametersById.get("monosynth02_gain").value = 0.50;
+    dir_stream = dir_stream.slice(1);
+    dir_stream.push(dir);
 
-        let ms01osc = 3;
-        if(dir=1) {
-            ms01osc = 3;
-        } else {
-            ms01osc = 4;
-        }
-        device.parametersById.get("monosynth02_osc").value = ms01osc;
 
-        play_monoSynth02();
-    } else if (Count%(F)==2) {
-        // device.parametersById.get("monosynth02_gain").value = 0.10;
-        // play_monoSynth02();
+
+
+    // kick (ms01)
+    if(COUNT%kk01_step==0) {
+        playNote_ms01(1);
+    }
+    if(COUNT%kk01_step==2) {
+        playNote_ms01(1);
+    }
+    if(COUNT%1==0 && makeChoice(doublekickchance)) {
+        playNote_ms01(-3);
     }
 
+    // snare (ms02)
+    if(COUNT%sn01_step==0 && makeChoice(snarechance)) {
+        playNote_ms02(1);
+    }
+    // if(COUNT%8==4) {
+    //     playNote_ms02(1);
+    // }
 
-
-    if(Count%F==0) {
-        let chord = [];
-        // if(dir==1) {
-            chord = [1, 3, 5];
-        // } else {
-        //     chord = [-3, -1, 1];
-        // }
-
-        let octish = 0;
-        if(averagePercentDelta>percentTrigger01) {
-            octish = 1; 
-        } else if (averagePercentDelta<-percentTrigger01){
-            octish = -1; 
-        }
-        // if(dir==1) {
-        //     octish = 1;
-        // } else if (dir==-1) {
-        //     octish = -1;
-        // } else {
-        //     octish = 0;
-        // }
-        let deg = chooseFromArray(chord);
-
-        deg = deg + octish*7;
-
-        // device.parametersById.get("polysynth01_oct").value = chooseFromArray([0.5, 1.0]);
-
-        if(averagePercentDeltaAbs>percentTrigger01){
-            playNote_ps01(deg);
-
-        }
-
+    // hat01 (ms03)
+    if(COUNT%hh01_step==0 && makeChoice(hatchance)) {
+        playNote_ms03(1);
     }
 
-    if(Count%(F*4)==0) {
-        let deg = 1;
-        if(averagePercentDelta>percentTrigger01) {
-            deg=4; 
-        } else if (averagePercentDelta<-percentTrigger01){
-            deg=-1; 
-        }
+    // sh01 (ms04)
+    if(COUNT%sh01_step==sh01_offset) {
+        playNote_ms04(1);
+    }
+
+    // bass (b01)
+    
+    if(COUNT%b01_step==0) {
+        // let count;
+        let deg0 = b01_deg0;
+        let deg = deg0 + b01_inc*b01_count;
         playNote_b01(deg);
+        // b01inc = b01inc + 1;
+        if(b01_count>3) {
+            deg=deg0;
+            b01_count = 0;
+        }
+        // console.log("b01inc",b01inc)
+        b01_count = b01_count+1;
+    }
+
+
+    // bleep (ms08)
+    if(COUNT%ms08_step==3) {
+
+        let dir_stream_avg = average(dir_stream);
+
+        let deg1 = getRandomFloat(0,4);
+
+        if(dir_stream_avg>0) {
+            deg2 = deg1 + 1;
+        } else if (dir_stream_avg<0) {
+            deg2 = deg1 - 1;
+        } else {
+            deg2 = deg1;
+        }
+
+        playNote_ms08(deg1);
+
+        // deg = getRandomFloat(0,4);
+        setTimeout(playNote_ms08,100,deg2);
+    }
+
+    // ps01
+
+    if(COUNT%ps01_step==0) {
+
+        // deg = 9 + COUNT%4
+
+        var oct;
+        if(COUNT%8==0) {
+            oct = chooseFromArray([0.5,1.0]);; 
+            device.parametersById.get("polysynth01_oct").value = oct;
+        }
+
+        if(oct==0.5){
+            device.parametersById.get("polysynth01_gain").value = 0.033;
+        } else {
+            device.parametersById.get("polysynth01_gain").value = 0.020;
+        }
+
+        if((COUNT%ps01_stride)<(ps01_stride/2)) {
+            ps01_deg0 = 3;
+        } else {
+            ps01_deg0 = 5;
+        }
+        let deg = ps01_deg0;
+        playNote_ps01(deg);
+
+        // deg = getRandomFloat(0,4);
+        // setTimeout(playNote_ps01,100,deg);
     }
 
 
 
 
-
-    // if(averagePercentDeltaAbs>0.005) {
-        playUpDownPeriodic(averageDelta);
-
-    // }
-
-
-    if(Count%(F*8)==0) {
-
-        // if(averageDelta>0) {
-        //     playUpPeriodic(averageDelta);
-        // } else if (averageDelta<0) {
-        //     playDownPeriodic(averageDelta);
-        // } else {
-        //     //
+    /////////////////////////////////////////////// Percent Threshold Trigger Stuff
+    if(COUNT%32==0 && COUNT>0) {
+        // if(justWentOver==1){
+            justWentUnder = 0;
         // }
+        // if(justWentUnder==1) {
+            justWentOver = 0;
+        // }
+        // console.log("percentTriggerLow",percentTriggerLow);
 
-        // setTimeout(playNote_ms01,0,3);
-        // setTimeout(playNote_ms01,100,3+dir);
+        // console.log("justWentOver",justWentOver);
+        // console.log("justWentUnder",justWentUnder);
+
     }
 
-    // if(Count%(F*4)==0) {
-    //     // play_polySynth01();
+    let delayTime;
+    let deg0;
+    let N;
+    let delayTimeExp
+
+    if(percentFrom0>percentTriggerHigh && justWentOver==0) {
+
+        LEVEL = LEVEL + 1;
+
+        updateSongForLevel(LEVEL);
+
+        ps02_inc = 2;
+        ps02_inc2 = 1;
+        delayTime = 50;
+        deg0 = 4;
+        N=4;
+        delayTimeExp = 1;
+        play_ps02(ps02_inc, ps02_inc2, delayTime, deg0, N, delayTimeExp)
+
+        justWentOver = 1;
+
+        // console.log("just went OVER");
+
+        if(Math.sign(percentFrom0)<0) {
+            percentTriggerHigh = Math.floor(percentFrom0/percentTrigger01Step)*percentTrigger01Step + percentTrigger01;
+            percentTriggerLow  = Math.floor(percentFrom0/percentTrigger01Step)*percentTrigger01Step - percentTrigger01;
+        } else {
+            percentTriggerHigh = Math.floor(percentFrom0/percentTrigger01Step)*percentTrigger01Step + percentTrigger01;
+            percentTriggerLow  = Math.floor(percentFrom0/percentTrigger01Step)*percentTrigger01Step - percentTrigger01;
+        }   
+        // console.log("justWentOver");
+        // console.log("percentTrigger01",percentTrigger01);
+        // console.log("percentFrom0",percentFrom0);
+
+
+    } else if (percentFrom0<percentTriggerLow && justWentUnder==0) {
+
+        LEVEL = LEVEL - 1;
+
+        updateSongForLevel(LEVEL);
+
+        ps02_inc = -3.4;
+        ps02_inc2 = -1;
+        delayTime = 100;
+        deg0 = 8;
+        N = 5;
+        delayTimeExp = 1.1;
+        play_ps02(ps02_inc, ps02_inc2, delayTime, deg0, N, delayTimeExp)
+
+        justWentUnder = 1;
+
+        // console.log("just went UNDER");
+
+        if(Math.sign(percentFrom0)<0) {
+            percentTriggerHigh = Math.ceil(percentFrom0/percentTrigger01Step)*percentTrigger01Step + percentTrigger01;
+            percentTriggerLow  = Math.ceil(percentFrom0/percentTrigger01Step)*percentTrigger01Step - percentTrigger01;
+        } else {
+            percentTriggerHigh = Math.ceil(percentFrom0/percentTrigger01Step)*percentTrigger01Step + percentTrigger01;
+            percentTriggerLow  = Math.ceil(percentFrom0/percentTrigger01Step)*percentTrigger01Step - percentTrigger01;
+        }   
+
+        // console.log("percentTrigger01",percentTrigger01);
+        // console.log("percentFrom0",percentFrom0);
+
+
+    } else {
         
-    //     var deg_ps01 = 3 + dir;
-    //     playNote_ps01(deg_ps01);
-    //     playNote_ps02(deg_ps01);
-
-    //     playNote_b01(deg_ps01);
-
-    // }
-
-    if(Count%(F)==0) {
-        // play_polySynth02();
+        // console.log("neither");
+        // return;
     }
 
-    if(Count%(4*F)==0) {
-        // play_bass01();
-        // playNote_ps01(degnew);
-    }
 
-    Count = Count + 1;
-
-    // if(Count%(F)==0) {
-    //     drawVisualizer();
-    // }
-
- 
-
-    CoinValue0 = average_CoinValue;
+    COUNT = COUNT + 1;
 
 }
 
 
 
 
-deg_ms01 = 1;
 
-// function play_monoSynth01() {
 
-//     let roundedCoinDelta = Math.round(CoinDelta/8);
 
-//     var deg; 
 
-//     if (CoinValue>92200 && CoinValue<92300) {
-//         deg = 3;
-//     } else if (CoinValue>92100 && CoinValue<92200) {
-//         deg = 2;
-//     } else if (CoinValue>92000 && CoinValue<92100) {
-//         deg = 1;
-//     } else if (CoinValue>91900 && CoinValue<92000) {
-//         deg = 0;
-//     } else if (CoinValue>91800 && CoinValue<91900) {
-//         deg = -1;
-//     }
+function play_ps02(ps02_inc, ps02_inc2, delayTime, deg0, N, delayTimeExp) {
 
-//     deg_ms01 =  deg;
+    let delay0 = 0;
+    let delay = delay0;
+    let deg = deg0;
 
-//     // console.log("roundedCoinDelta",roundedCoinDelta);
+    for(let i=0;i<N;i++) {
 
-//     // deg_ms01 = deg_ms01 + roundedCoinDelta;
+        deg = deg0 + ps02_inc*(i)+ps02_inc2*i;
+        delay = delay0 + (delayTime*i)**delayTimeExp;
 
-//     playNote_ms01();
+        // console.log("ps02_inc",ps02_inc);
 
-// };
+        setTimeout( playNote_ps02, delay, deg);
 
-function play_monoSynth01() {
-
-    deg_ms01 =  getRandomInt(-2,2);
-
-    if(makeChoice(75)) {
-        playNote_ms01(deg_ms01);
     }
 
-};
+
+
+// for(let i=0;i<N-1;i++) {
+
+//     deg = deg0+ps02_inc*i - 7;
+    
+//     setTimeout( playNote_ps02, delay, deg);
+
+//     delay = delay0 + delayTime2*i + 600;
+// }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function playNote_b01(deg) {
+    device.parametersById.get("b01/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
+}
 
 function playNote_ms01(deg) {
-    var v;
-    if(deg<0) {
-        v = -0.1;
-    } else {
-        v = 0.1;
-    }
-    device.parametersById.get("monosynth01_deg").value = deg + getRandomFloat(0,v);
-
+    device.parametersById.get("ms01/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
 }
-
-
-function play_monoSynth02() {
-
-    deg_ms01 =  1;
-
-    playNote_ms02(deg_ms01);
-    
-};
-
 function playNote_ms02(deg) {
-    // device.parametersById.get("monosynth01_decCurve").value = getRandomFloat(1,6);
-    var v;
-    if(deg<0) {
-        v = -0.1;
-    } else {
-        v = 0.1;
-    }
-    device.parametersById.get("monosynth02_deg").value = deg + getRandomFloat(0,v);
+    device.parametersById.get("ms02/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
 }
-
-
-
-
-
-
-deg_ps01 = 1;
-degold = deg_ps01;
-
-function play_polySynth01() {
-
-    let deg = getRandomInt(-4, 4);
-
-    playNote_ps01(deg);
-
-};
+function playNote_ms03(deg) {
+    device.parametersById.get("ms03/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
+}
+function playNote_ms04(deg) {
+    device.parametersById.get("ms04/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
+}
+function playNote_ms05(deg) {
+    device.parametersById.get("ms05/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
+}
+function playNote_ms06(deg) {
+    device.parametersById.get("ms06/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
+}
+function playNote_ms07(deg) {
+    device.parametersById.get("ms07/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
+}
+function playNote_ms08(deg) {
+    device.parametersById.get("ms08/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
+}
 
 function playNote_ps01(deg) {
-
-    var v;
-    if(deg<0) {
-        v = -0.1;
-    } else {
-        v = 0.1;
-    }
-    device.parametersById.get("polysynth01_deg").value = deg + getRandomFloat(0,v);
-
+    device.parametersById.get("polysynth01_deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
 }
-
-
-
-function play_polySynth02() {
-
-    let deg = getRandomInt(-4, 4);
-
-    playNote_ps02(deg);
-
-};
-
-
 function playNote_ps02(deg) {
-    var v;
-    if(deg<0) {
-        v = -0.1;
-    } else {
-        v = 0.1;
-    }
-    device.parametersById.get("polysynth02_deg").value = deg + getRandomFloat(0,v);
+    device.parametersById.get("polysynth02_deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
 }
 
 
@@ -599,51 +389,9 @@ function playUpDownPeriodic(delta) {
 
 }
 
-// function playDownPeriodic(delta) {
-
-//     let delay = 0;
-//     let delayTime = 150;
-//     let N = Math.ceil( r2n(delta,0.005,0.050) * 16 ) + 4;
-//     deg = 3;
-
-//     setTimeout( playNote_ms01, delay, deg); // first one
-
-//     for(let i=0;i<N-1;i++) {
-
-//         deg = deg-1;
-        
-//         setTimeout( playNote_ms01, delay, deg);
-
-//         delay = delay + delayTime;
-//     }
-
-// }
 
 
 
 
 
 
-deg_b01 = 1;
-
-function play_bass01() {
-
-    // let roundedCoinDelta = Math.round(CoinDelta/16);
-    // deg_b01 = deg_b01 + roundedCoinDelta;
-
-    let deg = degnew;
-
-    playNote_b01(deg);
-
-}
-
-
-function playNote_b01(deg) {
-    var v;
-    if(deg<0) {
-        v = -0.1;
-    } else {
-        v = 0.1;
-    }
-    device.parametersById.get("bass01_deg").value = deg + getRandomFloat(0,v);
-}

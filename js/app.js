@@ -1,85 +1,22 @@
 // GLOBAL VARS
 device = {};
 
-mobileCutoff = 800;
+
 myrng = new Math.seedrandom();
-
-onePI = Math.PI; 
-twoPI = Math.PI * 2;
-PIo2  = Math.PI * 0.5;
-PIo4  = Math.PI * 0.25;
-PIo8  = Math.PI * 0.125;
-PIo16 = Math.PI * 0.0625;
-
-isToggled = false; 
-isDragging = false;
-isTouching = false;
-
-themeIndex = 0;
-
-PARAMS = {
-
-    master_gain:0.8,
-    master_lpf:0.737,
-    chance:0.27,
-    time:0.4,
-    release:0.749,
-
-}
-
-// PROB = PARAMS.chance;
-
 
 
 window.addEventListener("load", setupCanvases); // commented this out bc setupCanvases() is already called in setup()
 
+
+window.addEventListener("resize",handleResize);
+
+
+
+
+
 canvases = document.getElementsByClassName("dial");
 
 
-
-setTheme();
-
-function setTheme() {
-
-    // let themes = ['light','dark'];
-
-    // themeName = themes[themeIndex];
-
-
-
-
-    cssroot = document.documentElement;
-
-
-
-    //////// JS
-    //// KNOBS
-    // [hueKnobNeedle,satKnobNeedle,litKnobNeedle,alphaKnobNeedle] = [0, 0, 30, 0.5];
-    // [hueKnobBottom,satKnobBottom,litKnobBottom,alphaKnobBottom] = [200, 0, 40, 1.0];
-    // [hueKnobTop,satKnobTop,litKnobTop,alphaKnobTop] = [200, 50, 70, 1.0];
-    // [hueKnobShadow,satKnobShadow,litKnobShadow,alphaKnobShadow] = [0, 0, 0, 0.10];
-
-    //////// CSS
-    [hueBG, satBG, litBG] =  [190,0,10];
-    let hslBG = "hsl(" + hueBG + ", " + satBG + "%, " + litBG + "%)";
-    cssroot.style.setProperty('--bg-hsl', hslBG);
-    cssroot.style.setProperty('--text-color-body', 'hsl(130,50%,50%)');
-    // cssroot.style.setProperty('--text-color-h1','hsl(0,0%,10%)');
-    // cssroot.style.setProperty('--controlsContainer01-hsl','hsl(210, 90%, 70%, 0.1)');
-    // cssroot.style.setProperty('--controlsContainer01-border-hsl','hsl(0, 0%, 100%, 0.1)');
-
-
-
-
-    handleResize();
-
-    // draw_canvasSetTheme();
-
-    themeIndex = (themeIndex + 1) % 2;
-
-
-
-}
 
 
 
@@ -87,7 +24,6 @@ document.body.addEventListener("click",playSound);
 
 
 
-// window.addEventListener("load", setupCanvases); // commented this out bc setupCanvases() is already called in setup()
 
 
 async function silenceTrick() {
@@ -242,108 +178,93 @@ async function setup() {
 
 
 
-    let canvases = document.getElementsByClassName("dial");
-    for(let i=0; i<canvases.length; i++) {
-        canvases[i].style.cursor="grab";
-    }
+    // let canvases = document.getElementsByClassName("dial");
+    // for(let i=0; i<canvases.length; i++) {
+    //     canvases[i].style.cursor="grab";
+    // }
 
-    for(let i=0; i<canvases.length; i++) {
+    // for(let i=0; i<canvases.length; i++) {
 
-        let canvas = canvases[i];
+    //     let canvas = canvases[i];
 
-        canvas.addEventListener('mousedown', (event) => {
+    //     canvas.addEventListener('mousedown', (event) => {
             
-            isDragging = true;
-            // console.log("isDragging",isDragging)
+    //         isDragging = true;
+    //         // console.log("isDragging",isDragging)
 
-            // lastX = event.clientX - canvas.offsetLeft;
-            // lastY = event.clientY - canvas.offsetTop;
-            lastX = event.clientX;
-            lastY = event.clientY;
-            //thisCanvasOffsetLeft = canvas.offsetLeft
-            //thisCanvasOffsetTop = canvas.offsetTop
-            activeCanvasID = event.target.id;
-            // activeCanvasNum = activeCanvasID.substr(6,1) - 1; // index of the current active canvas (0,1,2,3,etc)
-            console.log("event.target.id",event.target.id);
-            let canvases = document.getElementsByClassName("dial");
-            for(let i=0; i<canvases.length; i++) {
-                canvases[i].style.cursor="grabbing";
-            }
-        });
+    //         // lastX = event.clientX - canvas.offsetLeft;
+    //         // lastY = event.clientY - canvas.offsetTop;
+    //         lastX = event.clientX;
+    //         lastY = event.clientY;
+    //         //thisCanvasOffsetLeft = canvas.offsetLeft
+    //         //thisCanvasOffsetTop = canvas.offsetTop
+    //         activeCanvasID = event.target.id;
+    //         // activeCanvasNum = activeCanvasID.substr(6,1) - 1; // index of the current active canvas (0,1,2,3,etc)
+    //         console.log("event.target.id",event.target.id);
+    //         let canvases = document.getElementsByClassName("dial");
+    //         for(let i=0; i<canvases.length; i++) {
+    //             canvases[i].style.cursor="grabbing";
+    //         }
+    //     });
 
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            document.body.style.cursor = "default";
-            let canvases = document.getElementsByClassName("dial");
-            for(let i=0; i<canvases.length; i++) {
-                canvases[i].style.cursor="grab";
-            }
-            // console.log("isDragging",isDragging)
+    //     document.addEventListener('mouseup', () => {
+    //         isDragging = false;
+    //         document.body.style.cursor = "default";
+    //         let canvases = document.getElementsByClassName("dial");
+    //         for(let i=0; i<canvases.length; i++) {
+    //             canvases[i].style.cursor="grab";
+    //         }
+    //         // console.log("isDragging",isDragging)
 
-        });
+    //     });
 
 
-        canvas.addEventListener('touchstart', (event) => {
+    //     canvas.addEventListener('touchstart', (event) => {
             
-            isTouching = true;
-            console.log("touchstart")
+    //         isTouching = true;
+    //         console.log("touchstart")
 
-            const touch = event.touches[0];
-            lastX = touch.clientX;
-            lastY = touch.clientY;
-            // thisCanvasOffsetLeft = canvas.offsetLeft
-            // thisCanvasOffsetTop = canvas.offsetTop
-            activeCanvasID = event.target.id;
-            activeCanvasNum = activeCanvasID.substr(6,1) - 1; // index of the current active canvas (0,1,2,3,etc)
-            console.log("event.target.id",event.target.id);
-        });
+    //         const touch = event.touches[0];
+    //         lastX = touch.clientX;
+    //         lastY = touch.clientY;
+    //         // thisCanvasOffsetLeft = canvas.offsetLeft
+    //         // thisCanvasOffsetTop = canvas.offsetTop
+    //         activeCanvasID = event.target.id;
+    //         activeCanvasNum = activeCanvasID.substr(6,1) - 1; // index of the current active canvas (0,1,2,3,etc)
+    //         console.log("event.target.id",event.target.id);
+    //     });
 
-        document.addEventListener('touchend', () => {
-            console.log("touchend")
-            isTouching = false;
-            // lastY[activeCanvasNum] = 0; // reset lastY back to 0
-            // console.log("isDragging",isDragging)
+    //     document.addEventListener('touchend', () => {
+    //         console.log("touchend")
+    //         isTouching = false;
+    //         // lastY[activeCanvasNum] = 0; // reset lastY back to 0
+    //         // console.log("isDragging",isDragging)
 
-        });
-    }
+    //     });
+    // }
     
     
+    playSong();
 
+    setInterval(drawVisualizer,34);
 
-
-
-
-
-    // ///////// INITIAL PARAMETER SETTING
-    setupParams();
-
-
-
-    TIME = 250;
-
-    F = 1000/TIME;
-
-    setInterval(updateTicker,TIME);
-    // setInterval(updateTicker,250);
-
-    // setInterval(adjustNoise,34);
-
-
-    // setTimeout(play_bass01, 1000);
-
-    // setTimeout(play_monoSampler01,1000);
-
-    // setTimeout(play_polySampler01,1000);
 
 
 
 }
 
 
-// function adjustNoise() {
 
-//     let gain = r2n(averagePercentDelta,0.005,0.050);
-//     device.parametersById.get("pink_gain").value = gain;
+
+
+
+
+
+
+// for(let i=0; i<canvases.length; i++) {
+//     canvases[i].style.cursor="grab";
+//     canvases[i].addEventListener('mousedown', playSound);
+//     canvases[i].addEventListener('touchstart', playSound);
 
 // }
 
@@ -351,147 +272,132 @@ async function setup() {
 
 
 
+// //////////////////////////////////////////////////////////////////////////////////////////////// ASSIGN EVENT LISTENERS
+// for(let i=0; i<canvases.length; i++) {
 
+//     let canvas = canvases[i];
 
-// canvases = document.getElementsByClassName("dial");
-for(let i=0; i<canvases.length; i++) {
-    canvases[i].style.cursor="grab";
-    canvases[i].addEventListener('mousedown', playSound);
-    canvases[i].addEventListener('touchstart', playSound);
-
-}
-
-// let blankControlCanvases = document.getElementsByClassName("blankControlCanvas");
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////// ASSIGN EVENT LISTENERS
-for(let i=0; i<canvases.length; i++) {
-
-    let canvas = canvases[i];
-
-    canvas.addEventListener('mousedown', (event) => {
+//     canvas.addEventListener('mousedown', (event) => {
         
-        isDragging = true;
+//         isDragging = true;
 
-        lastX = event.clientX;
-        lastY = event.clientY;
+//         lastX = event.clientX;
+//         lastY = event.clientY;
 
-        activeCanvasID = event.target.id;
-        activeCanvasName = get_activeCanvasName(activeCanvasID);
-        // console.log("event.target.id",event.target.id);
-        for(let i=0; i<canvases.length; i++) {
-            canvases[i].style.cursor="grabbing";
-        }
-    });
+//         activeCanvasID = event.target.id;
+//         activeCanvasName = get_activeCanvasName(activeCanvasID);
+//         // console.log("event.target.id",event.target.id);
+//         for(let i=0; i<canvases.length; i++) {
+//             canvases[i].style.cursor="grabbing";
+//         }
+//     });
 
-    canvas.addEventListener('touchstart', (event) => {
+//     canvas.addEventListener('touchstart', (event) => {
         
-        isDragging = true;
+//         isDragging = true;
 
-        const touch = event.touches[0]; // Get the first touch point
+//         const touch = event.touches[0]; // Get the first touch point
 
-        lastX = touch.clientX;
-        lastY = touch.clientY;
+//         lastX = touch.clientX;
+//         lastY = touch.clientY;
 
-        activeCanvasID = event.target.id;
-        activeCanvasName = get_activeCanvasName(activeCanvasID);
-        // console.log("event.target.id",event.target.id);
-        for(let i=0; i<canvases.length; i++) {
-            canvases[i].style.cursor="grabbing";
-        }
-    });
+//         activeCanvasID = event.target.id;
+//         activeCanvasName = get_activeCanvasName(activeCanvasID);
+//         // console.log("event.target.id",event.target.id);
+//         for(let i=0; i<canvases.length; i++) {
+//             canvases[i].style.cursor="grabbing";
+//         }
+//     });
 
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-        document.body.style.cursor = "default";
-        for(let i=0; i<canvases.length; i++) {
-            canvases[i].style.cursor="grab";
-        }
-    });
+//     document.addEventListener('mouseup', () => {
+//         isDragging = false;
+//         document.body.style.cursor = "default";
+//         for(let i=0; i<canvases.length; i++) {
+//             canvases[i].style.cursor="grab";
+//         }
+//     });
 
-    document.addEventListener('touchend', () => {
-        isDragging = false;
-        document.body.style.cursor = "default";
-        for(let i=0; i<canvases.length; i++) {
-            canvases[i].style.cursor="grab";
-        }
-    });
+//     document.addEventListener('touchend', () => {
+//         isDragging = false;
+//         document.body.style.cursor = "default";
+//         for(let i=0; i<canvases.length; i++) {
+//             canvases[i].style.cursor="grab";
+//         }
+//     });
 
-    document.addEventListener('mousemove', (event) => {
+//     document.addEventListener('mousemove', (event) => {
 
-        if (!isDragging) return;
-        document.body.style.cursor = "grabbing";
+//         if (!isDragging) return;
+//         document.body.style.cursor = "grabbing";
 
-        const x = event.clientX;
-        const y = event.clientY;
+//         const x = event.clientX;
+//         const y = event.clientY;
 
-        let dy = y - lastY;
+//         let dy = y - lastY;
 
-        let v = PARAMS[activeCanvasName] - dy*0.007;
+//         let v = PARAMS[activeCanvasName] - dy*0.007;
 
-        val = Math.min(Math.max(0,v),1);
+//         val = Math.min(Math.max(0,v),1);
 
-        PARAMS[activeCanvasName] = val;
+//         PARAMS[activeCanvasName] = val;
 
-        let canvas = document.getElementById(activeCanvasID);
+//         let canvas = document.getElementById(activeCanvasID);
 
-        let funcName = "updateRNBOPARAM_"+ activeCanvasName;
-        window[funcName](); // run the assign function corresponding to the active parameter
+//         let funcName = "updateRNBOPARAM_"+ activeCanvasName;
+//         window[funcName](); // run the assign function corresponding to the active parameter
         
-        // if(activeCanvasNum==0) {
-        //     drawKnobDrive(canvas,val);
-        // } else {
-            drawKnob(canvas,val);
-        // }            
+//         // if(activeCanvasNum==0) {
+//         //     drawKnobDrive(canvas,val);
+//         // } else {
+//             drawKnob(canvas,val);
+//         // }            
 
-        lastY = y;
+//         lastY = y;
 
-    });
+//     });
 
-    document.addEventListener('touchmove', (event) => {
+//     document.addEventListener('touchmove', (event) => {
 
-        if (!isDragging) return;
-        document.body.style.cursor = "grabbing";
+//         if (!isDragging) return;
+//         document.body.style.cursor = "grabbing";
 
-        const touch = event.touches[0]; // Get the first touch point
+//         const touch = event.touches[0]; // Get the first touch point
 
-        const x = touch.clientX;
-        const y = touch.clientY;
+//         const x = touch.clientX;
+//         const y = touch.clientY;
 
-        let dy = y - lastY;
+//         let dy = y - lastY;
 
-        let v = PARAMS[activeCanvasName] - dy*0.007;
+//         let v = PARAMS[activeCanvasName] - dy*0.007;
 
-        val = Math.min(Math.max(0,v),1);
+//         val = Math.min(Math.max(0,v),1);
 
-        PARAMS[activeCanvasName] = val;
+//         PARAMS[activeCanvasName] = val;
 
-        let canvas = document.getElementById(activeCanvasID);
+//         let canvas = document.getElementById(activeCanvasID);
 
-        let funcName = "updateRNBOPARAM_"+ activeCanvasName;
-        window[funcName](); // run the assign function corresponding to the active parameter
+//         let funcName = "updateRNBOPARAM_"+ activeCanvasName;
+//         window[funcName](); // run the assign function corresponding to the active parameter
         
-        // if(activeCanvasNum==0) {
-        //     drawKnobDrive(canvas,val);
-        // } else {
-            drawKnob(canvas,val);
-        // }            
+//         // if(activeCanvasNum==0) {
+//         //     drawKnobDrive(canvas,val);
+//         // } else {
+//             drawKnob(canvas,val);
+//         // }            
 
-        lastY = y;
+//         lastY = y;
 
-    });
-}
-
-
+//     });
+// }
 
 
 
-function get_activeCanvasName(activeCanvasID) {
-    let activeCanvasName = activeCanvasID.substr(7,activeCanvasID.len);
-    return activeCanvasName;
-}
+
+
+// function get_activeCanvasName(activeCanvasID) {
+//     let activeCanvasName = activeCanvasID.substr(7,activeCanvasID.len);
+//     return activeCanvasName;
+// }
 
 function loadRNBOScript(version) {
     return new Promise((resolve, reject) => {
@@ -512,7 +418,6 @@ function loadRNBOScript(version) {
 
 
 
-window.addEventListener("resize",handleResize);
 
 
 

@@ -17,7 +17,7 @@ html, body {
 
     overflow:hidden;
     color:gray;
-    background-color: var(--bg-hsl);
+    background-color: hsl(0,0%,6%);
 }
 
 * {
@@ -38,21 +38,49 @@ html, body {
 
 }
 
+#container01 {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    padding-left:2vw;
+}
+
 
 #tickerText{
     font-size:6vh;
     text-align:left;
-    width:105vh;
-    margin-left:2vw;
+    /* width:105vh; */
+}
+
+#tickerHigh{
+    font-size:3vh;
+    text-align:right;
+}
+#tickerLow{
+    font-size:3vh;
+    text-align:right;
+}
+
+#countText{
+    font-size:4vh;
+    text-align:left;
+    /* width:105vh; */
+}
+
+#musicLevelText{
+    font-size:3vh;
+    text-align:left;
+    /* width:105vh; */
 }
 
 #canvasViz01 {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 0;
-    width:100vw;
-    height:100vh;
+    /* position: fixed; */
+    /* left: 0; */
+    /* top: 0; */
+    /* z-index: 0; */
+    width:60vw;
+    height:45vh;
 }
 
 
@@ -119,8 +147,11 @@ h4 {
 
     #tickerText{
         font-size:5vw;
-        text-align:left;
-        width:105vh;
+
+    }
+    #countText{
+        font-size:4vw;
+
     }
 
 }

@@ -1,6 +1,6 @@
 
-PATH = [];
 
+PATH = [];
 
 function drawVisualizer() {
 
@@ -17,10 +17,17 @@ function drawVisualizer() {
     artboardWo2 = (1/artboardAR)/2;
     xCenterOffset = artboardWo2;
     yCenterOffset = 0.0;
+
+
+
+let yTrigHigh  = r2n(100+percentTriggerHigh,50,150);
+let yTrigLow   = r2n(100+percentTriggerLow ,50,150);
+path_percentTriggerHigh = [[-artboardWo2,yTrigHigh],[artboardWo2,yTrigHigh]];
+path_percentTriggerLow = [[-artboardWo2,yTrigLow],[artboardWo2,yTrigLow]];
     
     // for(let i=0; i<SHAPES.length; i++) {
 
-        let yNew = r2n(CoinValue,91500,92500)*0.5 + 0.5;
+        let yNew = r2n(CoinValue,0.5,1.5);
         let lw = 0.002;
 
         PATH.push([0.1,yNew]);
@@ -55,6 +62,26 @@ function drawVisualizer() {
 
 
         drawPath(ctx, PATH, lw, hue, sat, lit, alpha, 1, 0);
+
+
+        if(COUNT%8>1) {
+
+            let coinValueHigh_trig = CoinValue0 + CoinValue0*percentTriggerHigh;
+            let coinValueLow_trig = CoinValue0 + CoinValue0*percentTriggerLow;
+
+            let yTrigHigh  = r2n(100+percentTriggerHigh,50,150);
+            let yTrigLow   = r2n(100+percentTriggerLow ,50,150);
+
+            path_percentTriggerHigh = [[-artboardWo2,yTrigHigh],[artboardWo2,yTrigHigh]];
+            path_percentTriggerLow = [[-artboardWo2,yTrigLow],[artboardWo2,yTrigLow]];
+
+        }
+
+        [hue,sat,lit,alpha] = [0,0,100,100];
+        drawPath(ctx, path_percentTriggerHigh, lw, hue, sat, lit, alpha, 1, 0);
+        drawPath(ctx, path_percentTriggerLow , lw, hue, sat, lit, alpha, 1, 0);
+    
+
 
  
 
