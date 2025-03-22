@@ -1,24 +1,5 @@
 function updateParams_Wallet() {
 
-    // b01
-    device.parametersById.get("b01/attack").value = 1000;
-
-    // ms01 (kick)
-    device.parametersById.get("ms01/attack").value = 3;
-    device.parametersById.get("ms01/decay").value = 100;
-    device.parametersById.get("ms01/pow").value = 4;
-    device.parametersById.get("ms01/shape").value = 2;
-    device.parametersById.get("ms01/drive").value = 4.0;
-
-    // ms04 (shaker)
-    device.parametersById.get("ms04/decay").value = 300;
-    device.parametersById.get("ms04/lpf").value = 2000;
-
-    // // ps02 (chime up/down)
-    // device.parametersById.get("ps02/attack").value = 5000;
-    // device.parametersById.get("ps02/decay").value = 200;
-    // device.parametersById.get("ps02/shape").value = 2.0;
-    // device.parametersById.get("ps02/pow").value = 3;
 
 
 

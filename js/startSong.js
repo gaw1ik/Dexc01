@@ -139,7 +139,9 @@ function startSong() {
 
     // document.getElementById("positions-button-02").click();
     // document.getElementById("positions-button-02").style.backgroundColor = 'hsl(0,0%,20%)';    setInterval(playSong,TIME2);
-    setInterval(playSong,TIME2);
+    // SONGINTERVAL = setInterval(playSong,TIME2);
+    SONGINTERVAL = setTimeout(playSong,TIME2);
+
 
 
 

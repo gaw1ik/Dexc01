@@ -93,15 +93,15 @@ function playSong() {
     switch (activeArea) {
 
         case "loun":
-            try { playInstruments_Lounge(); } catch(err) {console.log("whoops")}
+            try { playInstruments_Lounge(); } catch(err) {console.log(err)}
             break;
 
         case "scan":
-            try { playInstruments_Scanner(); } catch(err) {console.log("whoops")}
+            try { playInstruments_Scanner(); } catch(err) {console.log(err)}
             break;
 
         case "wall":
-            try { playInstruments_Wallet(); } catch(err) {console.log("whoops")}
+            try { playInstruments_Wallet(); } catch(err) {console.log(err)}
             break;
 
         case "posi":
@@ -132,8 +132,12 @@ function playSong() {
     COUNT = COUNT + 1;
 
 
-    // setTimeout(playSong,TIME2);
-
+    try { 
+        setTimeout(playSong,TIME2);
+    } catch(err) {
+        console.log(err)
+    }
+    
 
 }
 
