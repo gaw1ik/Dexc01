@@ -23,7 +23,7 @@ function playSong() {
         // console.log(COUNT-COUNTWHENCLICKED,"too soon, delayed a bar");
                 // console.log("updateParamsGate",updateParamsGate)
 
-    } else if (COUNT-COUNTWHENCLICKED >= MINCOUNTAPPROACH && COUNTMOD%32==0 && updateParamsGate==1) {
+    } else if (COUNT-COUNTWHENCLICKED >= MINCOUNTAPPROACH && COUNTMOD%16==0 && updateParamsGate==1) {
         activeArea = activeArea_new;
         tabID = tabID_new;
         // console.log("updateParams")

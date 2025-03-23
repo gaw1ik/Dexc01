@@ -1,14 +1,14 @@
-
-
-
-
 function updateParams_Lounge() {
 
+    device.parametersById.get("scaletype").value = 1;
+
+    device.parametersById.get("b01/attack").value = 100;
 
 
+    device.parametersById.get("ps02/attack").value = 100;
 
 
-
+    TIME2 = 105;
 
 
 }
@@ -27,12 +27,12 @@ function playInstruments_Lounge() {
     // }
 
     if(COUNT%128<64) {
-        device.parametersById.get("b01/fluxFreq").value = 0.5;
+        // device.parametersById.get("b01/fluxFreq").value = 0.5;
         device.parametersById.get("b01/oct").value = 0.125;
         b01_vel = 0.7;
         b01_deg2 = 1;
     } else {
-        device.parametersById.get("b01/fluxFreq").value = 0.4;
+        // device.parametersById.get("b01/fluxFreq").value = 0.4;
         device.parametersById.get("b01/oct").value = 0.25;
         b01_vel = 0.1;
         b01_deg2 = -5;
@@ -41,31 +41,31 @@ function playInstruments_Lounge() {
         let deg = 0;
         playNote_b01(deg,b01_vel);
     }
-    if(COUNT%32==7) {
-        let deg = 0;
-        playNote_b01(deg,b01_vel/3);
-    }
+    // if(COUNT%32==7) {
+    //     let deg = 0;
+    //     playNote_b01(deg,b01_vel/3);
+    // }
     if(COUNT%32==8) {
-        let deg = 1;
-        playNote_b01(b01_deg2,b01_vel/2);
+        let deg = b01_deg2
+        playNote_b01(deg,b01_vel/2);
     }
     if(COUNT%32==16) {
         let deg = 0;
         playNote_b01(deg,b01_vel);
     }
-    if(COUNT%32==19) {
-        let deg = 0;
-        playNote_b01(deg,b01_vel/3);
-    }
+    // if(COUNT%32==19) {
+    //     let deg = 0;
+    //     playNote_b01(deg,b01_vel/3);
+    // }
     if(COUNT%32==20) {
-        let deg = 1;
-        playNote_b01(b01_deg2,b01_vel/2);
+        let deg = b01_deg2;
+        playNote_b01(deg,b01_vel/2);
     }
 
-    // kick (ms01)
-    if(COUNT%16==8 ) {
-        playNote_ms01(1,0.3);
-    }
+    // // kick (ms01)
+    // if(COUNT%16==8 ) {
+    //     playNote_ms01(1,0.3);
+    // }
 
     // snare (ms02)
     if(COUNT%16==10) {
