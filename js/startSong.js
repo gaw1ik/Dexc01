@@ -125,7 +125,8 @@ function startSong() {
     updateParamsGate = 0;
     // tabID="positions-button-02";
     // tabID="lounge-tabs-button";
-    tabID="scanner-tabs-button";
+    // tabID="scanner-tabs-button";
+    tabID="wallet-tabs-button";
     tabID_substr = tabID.substr(0,4);
     tabID_new = tabID_substr;
     activeArea = tabID_new;
@@ -138,7 +139,7 @@ function startSong() {
     // document.getElementById("positions-button-02").click();
     // document.getElementById("positions-button-02").style.backgroundColor = 'hsl(0,0%,20%)';    setInterval(playSong,TIME2);
     // SONGINTERVAL = setInterval(playSong,TIME2);
-
+    updateParams_Wallet();
     SONGINTERVAL = setTimeout(playSong,TIME2);
 
 

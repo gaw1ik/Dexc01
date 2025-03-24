@@ -22,6 +22,24 @@ function setupParams() {
     playNote_b01(0,0);
 
 
+    // b02
+    device.parametersById.get("b02/osc").value = 1;
+    device.parametersById.get("b02/attack").value = 10;
+    device.parametersById.get("b02/decay").value = 800;
+    device.parametersById.get("b02/pow").value = 4;
+    device.parametersById.get("b02/shape").value = 1.6;
+    device.parametersById.get("b02/oct").value = 0.25;
+    device.parametersById.get("b02/gain").value = 0.01;
+    device.parametersById.get("b02/pan").value = 0.50;
+    device.parametersById.get("b02/drive").value = 4.0;
+    device.parametersById.get("b02/hpf").value = 80;
+    device.parametersById.get("b02/lpf").value = 4000;
+    device.parametersById.get("b02/send").value = 0.1;
+    device.parametersById.get("b02/fluxFreq").value = 0.5;
+    device.parametersById.get("b02/fluxAmnt").value = 0.5;
+    playNote_b02(0,0);
+
+
 
     // ms01 (kick)
     device.parametersById.get("ms01/osc").value = 1;
@@ -89,7 +107,7 @@ function setupParams() {
     device.parametersById.get("ms04/pow").value = 0.5;
     device.parametersById.get("ms04/shape").value = 1;
     device.parametersById.get("ms04/oct").value = 1;
-    device.parametersById.get("ms04/gain").value = 0.08;
+    device.parametersById.get("ms04/gain").value = 0.04;
     device.parametersById.get("ms04/pan").value = 0.4;
     device.parametersById.get("ms04/drive").value = 1.0;
     device.parametersById.get("ms04/hpf").value = 250;
@@ -104,7 +122,7 @@ function setupParams() {
     device.parametersById.get("ms05/pow").value = 1;
     device.parametersById.get("ms05/shape").value = 1;
     device.parametersById.get("ms05/oct").value = 1;
-    device.parametersById.get("ms05/gain").value = 0.02;
+    device.parametersById.get("ms05/gain").value = 0.005;
     device.parametersById.get("ms05/pan").value = 0.8;
     device.parametersById.get("ms05/drive").value = 1.0;
     device.parametersById.get("ms05/hpf").value = 250;
@@ -133,7 +151,7 @@ function setupParams() {
     device.parametersById.get("ms07/osc").value = 1;
     device.parametersById.get("ms07/attack").value = 10;
     device.parametersById.get("ms07/decay").value = 100;
-    device.parametersById.get("ms07/pow").value = 4;
+    device.parametersById.get("ms07/pow").value = 2;
     device.parametersById.get("ms07/shape").value = 2;
     device.parametersById.get("ms07/oct").value = 0.25;
     device.parametersById.get("ms07/gain").value = 0.10;
@@ -148,15 +166,17 @@ function setupParams() {
     // ms08 (bleep)
     device.parametersById.get("ms08/osc").value = 1;
     device.parametersById.get("ms08/attack").value = 10;
-    device.parametersById.get("ms08/decay").value = 100;
-    device.parametersById.get("ms08/pow").value = 1;
+    device.parametersById.get("ms08/decay").value = 600;
+    device.parametersById.get("ms08/pow").value = 2;
     device.parametersById.get("ms08/shape").value = 2;
-    device.parametersById.get("ms08/oct").value = 16;
-    device.parametersById.get("ms08/gain").value = 0.005;
-    device.parametersById.get("ms08/pan").value = 0.6;
-    device.parametersById.get("ms08/drive").value = 1.0;
+    device.parametersById.get("ms08/oct").value = 0.25;
+    device.parametersById.get("ms08/gain").value = 0.01;
+    device.parametersById.get("ms08/pan").value = 0.5;
+    device.parametersById.get("ms08/drive").value = 4.0;
+    device.parametersById.get("ms08/send").value = 0.05;
     device.parametersById.get("ms08/hpf").value = 250;
-    device.parametersById.get("ms08/send").value = 0.2;
+    device.parametersById.get("ms08/fluxFreq").value = 0.5;
+    device.parametersById.get("ms08/fluxAmnt").value = 0.5;
     playNote_ms08(0,0);
 
     // ps01
@@ -166,7 +186,7 @@ function setupParams() {
     device.parametersById.get("ps01/shape").value = 1.0;
     device.parametersById.get("ps01/drive").value = 1.0;
     device.parametersById.get("ps01/pow").value = 4;
-    device.parametersById.get("ps01/gain").value = 0.04;
+    device.parametersById.get("ps01/gain").value = 0.02;
     device.parametersById.get("ps01/osc").value = 2;
     device.parametersById.get("ps01/pan").value = 0.35;
     device.parametersById.get("ps01/hpf").value = 250;
@@ -206,7 +226,7 @@ function setupParams() {
     device.parametersById.get("ps03/drive").value = 1.0;
     device.parametersById.get("ps03/glide").value = 60;
     device.parametersById.get("ps03/hpf").value = 250;
-    device.parametersById.get("ps03/lpf").value = 2500;
+    device.parametersById.get("ps03/lpf").value = 600;
     device.parametersById.get("ps03/send").value = 0.5;
     device.parametersById.get("ps03/fluxFreq").value = 0.99;
     device.parametersById.get("ps03/fluxAmnt").value = 0.7;

@@ -8,8 +8,64 @@ function updateParams_Wallet() {
 
     device.parametersById.get("ps02/attack").value = 10;
 
+        // ps01
+        device.parametersById.get("ps01/oct").value = 0.5;
+        device.parametersById.get("ps01/attack").value = 2000;
+        device.parametersById.get("ps01/decay").value = 4000;
+        device.parametersById.get("ps01/shape").value = 1.0;
+        device.parametersById.get("ps01/drive").value = 1.0;
+        device.parametersById.get("ps01/pow").value = 4;
+        device.parametersById.get("ps01/gain").value = 0.02;
+        device.parametersById.get("ps01/osc").value = 2;
+        device.parametersById.get("ps01/pan").value = 0.35;
+        device.parametersById.get("ps01/hpf").value = 250;
+        device.parametersById.get("ps01/lpf").value = 800;
+        device.parametersById.get("ps01/send").value = 0.7;
+        device.parametersById.get("ps01/fluxFreq").value = 0.01;
+        device.parametersById.get("ps01/fluxAmnt").value = 0.007;
+        for(let i=0; i<8; i++) {
+            playNote_ps01(0,0);
+        }
+        // ps02
+        device.parametersById.get("ps02/oct").value = 0.5;
+        device.parametersById.get("ps02/attack").value = 100;
+        device.parametersById.get("ps02/decay").value = 100;
+        device.parametersById.get("ps02/shape").value = 1.0;
+        device.parametersById.get("ps02/pow").value = 0.5;
+        device.parametersById.get("ps02/gain").value = 0.010;
+        device.parametersById.get("ps02/osc").value = 2;
+        device.parametersById.get("ps02/pan").value = 0.6;
+        device.parametersById.get("ps02/drive").value = 0.7;
+        device.parametersById.get("ps02/send").value = 0.7;
+        device.parametersById.get("ps02/hpf").value = 250;
+        device.parametersById.get("ps02/lpf").value = 800;
+        device.parametersById.get("ps02/fluxFreq").value = 0.0;
+        device.parametersById.get("ps02/fluxAmnt").value = 0.0;
+        for(let i=0; i<8; i++) {
+            playNote_ps02(0,0);
+        }
+        // ps03
+        device.parametersById.get("ps03/oct").value = 2.0;
+        device.parametersById.get("ps03/attack").value = 20;
+        device.parametersById.get("ps03/decay").value = 4000;
+        device.parametersById.get("ps03/shape").value = 2;
+        device.parametersById.get("ps03/pow").value = 6;
+        device.parametersById.get("ps03/gain").value = 0.013;
+        device.parametersById.get("ps03/osc").value = 1;
+        device.parametersById.get("ps03/pan").value = 0.6;
+        device.parametersById.get("ps03/drive").value = 1.0;
+        device.parametersById.get("ps03/glide").value = 60;
+        device.parametersById.get("ps03/hpf").value = 250;
+        device.parametersById.get("ps03/lpf").value = 600;
+        device.parametersById.get("ps03/send").value = 0.5;
+        device.parametersById.get("ps03/fluxFreq").value = 0.99;
+        device.parametersById.get("ps03/fluxAmnt").value = 0.7;
+        for(let i=0; i<8; i++) {
+            playNote_ps03(0,0);
+        }
 
-    TIME2 = 120;
+
+    TIME2 = 115;
 
 
 }

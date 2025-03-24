@@ -3,7 +3,10 @@
 function playNote_b01(deg,vel) {
     device.parametersById.get("b01/vel").value = vel;
     device.parametersById.get("b01/deg").value = deg * getRandomFloat(1,1.01) + (deg==0)*Math.random();
-    // device.parametersById.get("b01/deg").value = deg + getRandomFloat(0,0.1)*Math.sign(deg);
+}
+function playNote_b02(deg,vel) {
+    device.parametersById.get("b02/vel").value = vel;
+    device.parametersById.get("b02/deg").value = deg * getRandomFloat(1,1.01) + (deg==0)*Math.random();
 }
 function playNote_ms01(deg,vel) {
     device.parametersById.get("ms01/vel").value = vel;
