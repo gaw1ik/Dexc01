@@ -220,7 +220,7 @@ function playInstruments_Lounge() {
             // device.parametersById.get("b01/attack").value = att;
             device.parametersById.get("b01/decay").value = att*2;
             let wait = getRandomFloat(0,20);
-            let vel = 0.3;
+            let vel = 0.1;
             setTimeout(playNote_b01,wait,deg,vel);
         }
     }
@@ -268,7 +268,7 @@ function playInstruments_Lounge() {
             device.parametersById.get("ps02/decay").value = att*2;
             let wait = getRandomFloat(0,20);
             let vel = 0.1;
-            setTimeout(playNote_b01,wait,deg,vel);
+            setTimeout(playNote_ps02,wait,deg,vel);
         }
     }
 
