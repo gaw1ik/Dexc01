@@ -44,11 +44,11 @@ function updateParams_Wallet() {
     device.parametersById.get("ps02/osc").value = 1;
     device.parametersById.get("ps02/pan").value = 0.6;
     device.parametersById.get("ps02/drive").value = 0.7;
-    device.parametersById.get("ps02/send").value = 0.2;
+    device.parametersById.get("ps02/send").value = 0.4;
     device.parametersById.get("ps02/hpf").value = 250;
     device.parametersById.get("ps02/lpf").value = 2500;
     device.parametersById.get("ps02/fluxFreq").value = 0.5;
-    device.parametersById.get("ps02/fluxAmnt").value = 0.1;
+    device.parametersById.get("ps02/fluxAmnt").value = 0.9;
     for(let i=0; i<8; i++) {
         playNote_ps02(0,0);
     }
@@ -167,8 +167,11 @@ function playInstruments_Wallet() {
     }
     var x = 'x';
     var deg_arr = [8,8,x,x,x,x,x,x,7,7,x,8,x,5,6,7];
+    var att_arr = [450,100,x,x,x,x,x,x,450,100,x,300,x,400,410,80];
     var deg = deg_arr[COUNT%16];
+    var att = att_arr[COUNT%16];
     if(deg!='x') {
+        device.parametersById.get("ms07/decay").value = att;
         let wait = getRandomFloat(0,20);
         let vel = getRandomFloat(0.1,0.6);
         setTimeout(playNote_ms07,wait,deg,vel);
@@ -193,14 +196,23 @@ function playInstruments_Wallet() {
     device.parametersById.get("ps02/attack").value = 10;
 
     if(COUNT%128==64) {
+        device.parametersById.get("ps02/attack").value = 10;
+        device.parametersById.get("ps02/decay").value = 150;
+        device.parametersById.get("ps02/fluxAmnt").value = 0.7;
         playNote_ps02(6,0.7);
         playNote_ps02(6+9,0.7);
     }
     if(COUNT%128==65) {
+        device.parametersById.get("ps02/attack").value = 5;
+        device.parametersById.get("ps02/decay").value = 80;
+        device.parametersById.get("ps02/fluxAmnt").value = 0.1;
         playNote_ps02(5,0.3);
         playNote_ps02(5+9,0.3);
     }
     if(COUNT%128==67) {
+        device.parametersById.get("ps02/attack").value = 10;
+        device.parametersById.get("ps02/decay").value = 150;
+        device.parametersById.get("ps02/fluxAmnt").value = 0.9;
         playNote_ps02(6,0.5);
         playNote_ps02(6+9,0.5);
     }
@@ -208,16 +220,24 @@ function playInstruments_Wallet() {
 
     
     if(COUNT%256>224) {
-    // if(makeChoice(25)) {
-        device.parametersById.get("ps02/attack").value = 40;
         var x = 'x';
         var deg_arr = [8,8,x,x,x,x,x,x,7,7,x,8,x,5,6,7];
+        var att_arr = [100,80,x,x,x,x,x,x,100,80,x,80,x,100,80,120];
+        var dec_arr = [150,80,x,x,x,x,x,x,150,80,x,80,x,100,80,120];
+        var fla_arr = [0.9,0.5,x,x,x,x,x,x,0.9,0.5,x,0.9,x,0.5,0.6,0.8];
         var deg = deg_arr[COUNT%16];
+        var att = att_arr[COUNT%16];
+        var dec = dec_arr[COUNT%16];
+        var fla = fla_arr[COUNT%16];
         if(deg!='x') {
+            device.parametersById.get("ps02/attack").value = att/10;
+            device.parametersById.get("ps02/decay").value = dec*1.5;
+            device.parametersById.get("ps02/fluxAmnt").value = fla;
             let wait = getRandomFloat(0,20);
             let vel = getRandomFloat(0.3,0.6);
             setTimeout(playNote_ps02,wait,deg,vel);
-            setTimeout(playNote_ps02,wait,deg+9,vel);
+            setTimeout(playNote_ps02,wait,deg+9,vel/2);
+            setTimeout(playNote_ps02,wait,deg+13,vel/30);
         }
     }
 

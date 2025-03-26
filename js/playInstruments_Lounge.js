@@ -51,6 +51,25 @@ function updateParams_Lounge() {
         playNote_ps01(0,0);
     }
 
+        // ps02
+        device.parametersById.get("ps02/oct").value = 0.5;
+        device.parametersById.get("ps02/attack").value = 10;
+        device.parametersById.get("ps02/decay").value = 100;
+        device.parametersById.get("ps02/shape").value = 1.0;
+        device.parametersById.get("ps02/pow").value = 0.5;
+        device.parametersById.get("ps02/gain").value = 0.015;
+        device.parametersById.get("ps02/osc").value = 1;
+        device.parametersById.get("ps02/pan").value = 0.6;
+        device.parametersById.get("ps02/drive").value = 0.7;
+        device.parametersById.get("ps02/send").value = 0.4;
+        device.parametersById.get("ps02/hpf").value = 250;
+        device.parametersById.get("ps02/lpf").value = 2500;
+        device.parametersById.get("ps02/fluxFreq").value = 0.5;
+        device.parametersById.get("ps02/fluxAmnt").value = 0.9;
+        for(let i=0; i<8; i++) {
+            playNote_ps02(0,0);
+        }
+
     // ps03
     device.parametersById.get("ps03/oct").value = 2.0;
     device.parametersById.get("ps03/attack").value = 20;
@@ -82,55 +101,72 @@ function playInstruments_Lounge() {
 
 
 
-    b02_vel = 0.4;
-    if(COUNT%32==12) {
-        let deg = 2;
-        let vel = b02_vel;
-        let wait = getRandomFloat(0,20);
-        setTimeout(playNote_b02,wait,deg,vel);
-    }
-    if(COUNT%32==14) {
-        let deg = 2;
-        let vel = b02_vel/2;
-        let wait = getRandomFloat(0,20);
-        setTimeout(playNote_b02,wait,deg,vel);
-    }
-    if(COUNT%32==16) {
-        let deg = 1;
-        let vel = b02_vel/3;
-        let wait = getRandomFloat(0,20);
-        setTimeout(playNote_b02,wait,deg,vel);
-    }
-    if(COUNT%32==20) {
-        let deg = -3;
-        let vel = b02_vel/4;
-        let wait = getRandomFloat(0,20);
-        setTimeout(playNote_b02,wait,deg,vel);
-    }
+    // b02_vel = 0.4;
+    // if(COUNT%32==12) {
+    //     let deg = 2;
+    //     let vel = b02_vel;
+    //     let wait = getRandomFloat(0,20);
+    //     setTimeout(playNote_b02,wait,deg,vel);
+    // }
+    // if(COUNT%32==14) {
+    //     let deg = 2;
+    //     let vel = b02_vel/2;
+    //     let wait = getRandomFloat(0,20);
+    //     setTimeout(playNote_b02,wait,deg,vel);
+    // }
+    // if(COUNT%32==16) {
+    //     let deg = 1;
+    //     let vel = b02_vel/3;
+    //     let wait = getRandomFloat(0,20);
+    //     setTimeout(playNote_b02,wait,deg,vel);
+    // }
+    // if(COUNT%32==20) {
+    //     let deg = -3;
+    //     let vel = b02_vel/4;
+    //     let wait = getRandomFloat(0,20);
+    //     setTimeout(playNote_b02,wait,deg,vel);
+    // }
 
 
     // kick (ms01)
-    if(COUNT%8==0) {
+    if(COUNT%4==0) {
         let vel = getRandomFloat(0.1,0.4);
         let wait = getRandomFloat(0,20);
         setTimeout(playNote_ms01,wait,1,vel);
     }
-    if(COUNT%16==10) {
+    if(COUNT%8==6) {
         let vel = getRandomFloat(0.1,0.4);
         let wait = getRandomFloat(0,20);
         setTimeout(playNote_ms01,wait,1,vel);
     }
+    // if(COUNT%16==9) {
+    //     let vel = getRandomFloat(0.1,0.4);
+    //     let wait = getRandomFloat(0,20);
+    //     setTimeout(playNote_ms01,wait,1,vel);
+    // }
 
 
     // snare (ms02)
-    if(COUNT%16==10) {
+    if(COUNT%16==8) {
+        device.parametersById.get("ms02/attack").value = 5;
+        device.parametersById.get("ms02/decay").value = 20;
         playNote_ms02(1,0.7);
+    }
+
+    // snare (ms02)
+    if(COUNT%1==0 && makeChoice(50) && COUNT%16!=8) {
+        device.parametersById.get("ms02/attack").value = getRandomFloat(1,5);
+        device.parametersById.get("ms02/decay").value = getRandomFloat(1,20);
+
+        let vel = getRandomFloat(0.1,0.3)*0.2;
+        let wait = getRandomFloat(0,20);
+        playNote_ms02(1,vel);
     }
 
 
     // hat01 (ms03)
-    if(COUNT%2==0) {
-        let vel = getRandomFloat(0.1,0.4);
+    if(COUNT%1==0) {
+        let vel = getRandomFloat(0.1,0.4)*0.2;
         let wait = getRandomFloat(0,20);
         setTimeout(playNote_ms03,wait,1,vel);
     }
@@ -142,10 +178,10 @@ function playInstruments_Lounge() {
         let wait = getRandomFloat(0,0);
         setTimeout(playNote_ms04,wait,1,0.1);
     }
-    if(COUNT%8==4) {
-        let wait = getRandomFloat(0,20);
-        setTimeout(playNote_ms04,wait,1,0.03);
-    }
+    // if(COUNT%8==4) {
+    //     let wait = getRandomFloat(0,20);
+    //     setTimeout(playNote_ms04,wait,1,0.03);
+    // }
     // if(COUNT%4==0) {
     //     let wait = getRandomFloat(0,20);
     //     setTimeout(playNote_ms04,wait,1,0.01);
@@ -158,24 +194,38 @@ function playInstruments_Lounge() {
         playNote_ms05(deg,0.10);
     }
 
-    // ms07
-    let ms07_vel = 0.2;
-    if(COUNT%64==32) {
-        playNote_ms07(3,ms07_vel);
-    } 
-    if (COUNT%64==33) {
-        playNote_ms07(3,ms07_vel/2);
-    }
-    if(COUNT%64==35) {
-        playNote_ms07(3,ms07_vel);
-    }
-    if (COUNT%64==36) {
-        playNote_ms07(3,ms07_vel/2);
+    var x = 'x';
+
+    if(COUNT%64<48){
+        var deg_arr = [0  ,x,x,x,x,x,1  ,x,x,x,x,x,x,x,x,x];
+        var att_arr = [450,x,x,x,x,x,300,x,x,x,x,x,x,x,x,x];
+        var deg = deg_arr[COUNT%16];
+        var att = att_arr[COUNT%16];
+        if(deg!='x') {
+            // device.parametersById.get("b01/attack").value = att;
+            device.parametersById.get("b01/decay").value = att;
+            let wait = getRandomFloat(0,20);
+            let vel = getRandomFloat(0.1,0.6);
+            setTimeout(playNote_b01,wait,deg,vel);
+        }
     }
 
-    if (COUNT%64==48) {
-        playNote_ms07(-4,ms07_vel);
+    if(COUNT%64>47){
+        var deg_arr = [3  ,x,x,x,x,x,2  ,x,x,x,x,x,0  ,x,x,x,x,x,x,x,x,x,x,x];
+        var att_arr = [450,x,x,x,x,x,300,x,x,x,x,x,200,x,x,x,x,x,x,x,x,x,x,x];
+        var deg = deg_arr[(COUNT-48)%16];
+        var att = att_arr[(COUNT-48)%16];
+        if(deg!='x') {
+            // console.log(deg)
+            // device.parametersById.get("b01/attack").value = att;
+            device.parametersById.get("b01/decay").value = att*2;
+            let wait = getRandomFloat(0,20);
+            let vel = 0.3;
+            setTimeout(playNote_b01,wait,deg,vel);
+        }
     }
+
+
 
 
     // ps01
@@ -190,6 +240,36 @@ function playInstruments_Lounge() {
     if(COUNT%64==0) {
         playNote_ps01(1,0.7);
         setTimeout(playNote_ps01,100,6,0.3);
+    }
+
+    if(COUNT%64<48){
+        // var x = 'x';
+        var deg_arr = [0  ,x,x,x,x,x,1  ,x,x,x,x,x,x,x,x,x];
+        var att_arr = [450,x,x,x,x,x,100,x,x,x,x,x,x,x,x,x];
+        var deg = deg_arr[COUNT%16];
+        var att = att_arr[COUNT%16];
+        if(deg!='x') {
+            // device.parametersById.get("ps02/attack").value = att;
+            device.parametersById.get("ps02/decay").value = att;
+            let wait = getRandomFloat(0,20);
+            let vel = getRandomFloat(0.1,0.6);
+            setTimeout(playNote_ps02,wait,deg,vel);
+        }
+    }
+
+    if(COUNT%64>47){
+        var deg_arr = [3  ,x,x,x,x,x,2  ,x,x,x,x,x,0  ,x,x,x,x,x,x,x,x,x,x,x];
+        var att_arr = [450,x,x,x,x,x,300,x,x,x,x,x,200,x,x,x,x,x,x,x,x,x,x,x];
+        var deg = deg_arr[(COUNT-48)%16];
+        var att = att_arr[(COUNT-48)%16];
+        if(deg!='x') {
+            // console.log(deg)
+            // device.parametersById.get("b01/attack").value = att;
+            device.parametersById.get("ps02/decay").value = att*2;
+            let wait = getRandomFloat(0,20);
+            let vel = 0.1;
+            setTimeout(playNote_b01,wait,deg,vel);
+        }
     }
 
 
