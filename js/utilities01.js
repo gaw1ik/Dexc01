@@ -18,6 +18,26 @@ PIo16 = Math.PI/16;
 PIo32 = Math.PI/32;
 PIo64 = Math.PI/64;
 
+function prob(perc) {
+	return Math.random()*100<perc;
+}
+function randFromArray(arr) {
+	return arr[getRandomInt(0,arr.length-1)];
+}
+function sinDec(theta) {
+	return (Math.sin(theta)+1)*0.5;
+}
+// function toggle(value) {
+//     return value === 1 ? 2 : 1;
+// }
+function toggle(value) {
+    return value === 0 ? 1 : 0;
+}
+function stepper(value, max) {
+    return (value + 1) % (max + 1);
+}
+
+
 
 function average(arr) {
   let sum = 0;

@@ -80,6 +80,21 @@ html, body {
     background-color:black;
 }
 
+#songToggle {
+    cursor:pointer;
+    display:flex;
+    position:fixed;
+    top:0;
+    right:0;
+    align-items: center;
+    justify-content: center;
+    height:2rem;
+    width:5rem;
+    border:1px solid hsl(0,0%,20%);
+    border-radius:0.5rem;
+    font-size:0.7rem;
+}
+
 .tabs-navbar-left {
     display:flex;
 
@@ -96,6 +111,7 @@ html, body {
     justify-content: flex-end;
     padding: 2vh;
     width: 100%;
+    align-items: flex-start;
 }
 
 .tabs-button {

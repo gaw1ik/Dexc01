@@ -14,7 +14,7 @@ function setupCanvases() {
 
 
     // INITIAL STATE VALUES
-    currentMuteState = 0;
+    // currentMuteState = 0;
     VAL = [0.917, 0.400, 0.594, 0.682];
     LASTY = [0,0,0,0];
 

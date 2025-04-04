@@ -65,7 +65,7 @@ function updateParams_Wallet() {
         }
 
 
-    TIME2 = 115;
+    TIME = 115;
 
 
 }

@@ -63,9 +63,9 @@ async function playSound() {
 
     // document.body.removeEventListener('click', playSound);
 
-    currentMuteState = 1 - currentMuteState; 
+    // currentMuteState = 1 - currentMuteState; 
     // console.log("currentMuteState",currentMuteState);
-    gainNode.gain.setValueAtTime(currentMuteState, context.currentTime);
+    // gainNode.gain.setValueAtTime(currentMuteState, context.currentTime);
     // drawToggle(muteControl,currentMuteState,0);
 
     // document.getElementById("clickhereText").textContent = "ON";
@@ -266,12 +266,17 @@ async function setup() {
 }
 
 
-document.getElementById("lounge-tabs-button").addEventListener("click",updateSongForSiteArea);
-document.getElementById("scanner-tabs-button").addEventListener("click",updateSongForSiteArea);
-document.getElementById("wallet-tabs-button").addEventListener("click",updateSongForSiteArea);
+// document.getElementById("lounge-tabs-button").addEventListener("click",updateSongForSiteArea);
+// document.getElementById("scanner-tabs-button").addEventListener("click",updateSongForSiteArea);
+// document.getElementById("wallet-tabs-button").addEventListener("click",updateSongForSiteArea);
 document.getElementById("positions-button-01").addEventListener("click",updateSongForSiteArea);
 document.getElementById("positions-button-02").addEventListener("click",updateSongForSiteArea);
 document.getElementById("positions-button-03").addEventListener("click",updateSongForSiteArea);
+document.getElementById("song-button-01").addEventListener("click",updateSongForSiteArea);
+document.getElementById("song-button-02").addEventListener("click",updateSongForSiteArea);
+document.getElementById("song-button-03").addEventListener("click",updateSongForSiteArea);
+
+document.getElementById("songToggle").addEventListener("click",updateSongToggle);
 
 
 

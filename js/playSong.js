@@ -7,6 +7,7 @@ function playSong() {
     // console.log("play song")
 
 
+
     COUNTMOD = COUNT%32;
     QN = Math.floor(COUNTMOD/4) + 1;
     BAR = Math.floor(COUNT/32);
@@ -19,14 +20,19 @@ function playSong() {
 
     // let updateParamsGate = 0;
 
+    // console.log("updateParamsGate",updateParamsGate);
+    // console.log("COUNTWHENCLICKED",COUNTWHENCLICKED);
+
+
+
     if(COUNT-COUNTWHENCLICKED < MINCOUNTAPPROACH && updateParamsGate==0) {
         // console.log(COUNT-COUNTWHENCLICKED,"too soon, delayed a bar");
-                // console.log("updateParamsGate",updateParamsGate)
+        // console.log("updateParamsGate",updateParamsGate)
 
-    } else if (COUNT-COUNTWHENCLICKED >= MINCOUNTAPPROACH && COUNTMOD%16==0 && updateParamsGate==1) {
+    } else if (COUNT-COUNTWHENCLICKED >= MINCOUNTAPPROACH && COUNTMOD%32==1 && updateParamsGate==1) {
         activeArea = activeArea_new;
         tabID = tabID_new;
-        // console.log("updateParams")
+        console.log("updateParams")
         // updateParamsGate = 1;
         // if(updateParamsGate==1) {
         switch (activeArea) {
@@ -64,7 +70,19 @@ function playSong() {
                     if(tabID=="positions-button-03") {
                         // LEVEL=1;
                     }
-        
+                    break;
+
+                case "song":
+                    MINCOUNTAPPROACH = 0;
+                    if(tabID=="song-button-01") {
+                        updateParams_Song01();
+                    }
+                    if(tabID=="song-button-02") {
+                        updateParams_Song02();
+                    }
+                    if(tabID=="song-button-03") {
+                        updateParams_Song03();
+                    }
                     break;
         
                 default:
@@ -105,18 +123,20 @@ function playSong() {
             break;
 
         case "posi":
-            // if(tabID=="positions-button-01") {
-            //     LEVEL=7;
-            // }
-            // if(tabID=="positions-button-02") {
-            //     LEVEL=4;
-            // }
-            // if(tabID=="positions-button-03") {
-            //     LEVEL=1;
-            // }
-
             updateSongForLevel(LEVEL);
             try { playInstruments_Position(); } catch(err) {console.log(err)}
+            break;
+
+        case "song":
+            if(tabID=="song-button-01") {
+                try { playInstruments_Song01(); } catch(err) {console.log(err)}
+            }
+            if(tabID=="song-button-02") {
+                try { playInstruments_Song02(); } catch(err) {console.log(err)}
+            }
+            if(tabID=="song-button-03") {
+                try { playInstruments_Song03(); } catch(err) {console.log(err)}
+            }
             break;
 
         default:
@@ -131,12 +151,15 @@ function playSong() {
 
     COUNT = COUNT + 1;
 
-
-    try { 
-        setTimeout(playSong,TIME2);
-    } catch(err) {
-        console.log(err)
+    if(COUNT%2==0) {
+        COUNT16 = COUNT16 + 1;
     }
+
+
+
+
+    songTimeout = setTimeout(playSong,TIME);
+
     
 
 }
@@ -149,7 +172,7 @@ function updateSongForSiteArea() {
 
     tabID_substr = tabID.substr(0,4);
 
-    // console.log(tabID);
+    console.log(tabID);
 
     tabID_new = tabID;
 
@@ -163,20 +186,23 @@ function updateSongForSiteArea() {
 
     //////// Tab Appearance Control
     //// Reset all tab buttons to idle color
+    document.getElementById("song-button-01").style.backgroundColor = 'black';
+    document.getElementById("song-button-02").style.backgroundColor = 'black';
+    document.getElementById("song-button-03").style.backgroundColor = 'black';
     document.getElementById("positions-button-01").style.backgroundColor = 'black';
     document.getElementById("positions-button-02").style.backgroundColor = 'black';
     document.getElementById("positions-button-03").style.backgroundColor = 'black';
-    document.getElementById("lounge-tabs-button").style.backgroundColor = 'black';
-    document.getElementById("scanner-tabs-button").style.backgroundColor = 'black';
+    // document.getElementById("lounge-tabs-button").style.backgroundColor = 'black';
+    // document.getElementById("scanner-tabs-button").style.backgroundColor = 'black';
     document.getElementById("wallet-tabs-button").style.backgroundColor = 'black';
 
     //// Set Active Tab to Active Color
-    if(tabID=="lounge-tabs-button") {
-        document.getElementById("lounge-tabs-button").style.backgroundColor = 'hsl(0,0%,20%)';
-    }
-    if(tabID=="scanner-tabs-button") {
-        document.getElementById("scanner-tabs-button").style.backgroundColor = 'hsl(0,0%,20%)';
-    }
+    // if(tabID=="lounge-tabs-button") {
+    //     document.getElementById("lounge-tabs-button").style.backgroundColor = 'hsl(0,0%,20%)';
+    // }
+    // if(tabID=="scanner-tabs-button") {
+    //     document.getElementById("scanner-tabs-button").style.backgroundColor = 'hsl(0,0%,20%)';
+    // }
     if(tabID=="wallet-tabs-button") {
         document.getElementById("wallet-tabs-button").style.backgroundColor = 'hsl(0,0%,20%)';
     }
@@ -191,6 +217,15 @@ function updateSongForSiteArea() {
     if(tabID=="positions-button-03") {
         activeCoinInd = 2;
         document.getElementById("positions-button-03").style.backgroundColor = 'hsl(0,0%,20%)';
+    }
+    if(tabID=="song-button-01") {
+        document.getElementById("song-button-01").style.backgroundColor = 'hsl(0,0%,20%)';
+    }
+    if(tabID=="song-button-02") {
+        document.getElementById("song-button-02").style.backgroundColor = 'hsl(0,0%,20%)';
+    }    
+    if(tabID=="song-button-03") {
+        document.getElementById("song-button-03").style.backgroundColor = 'hsl(0,0%,20%)';
     }
 
 

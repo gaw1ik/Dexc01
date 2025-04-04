@@ -104,9 +104,9 @@ function playSong() {
     setInterval(updateTicker,1000);
 
 
-    TIME2 = 100;
+    TIME = 100;
     COUNT = 0;
-    setInterval(playInstruments,TIME2);
+    setInterval(playInstruments,TIME);
 
 
 
