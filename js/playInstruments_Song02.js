@@ -30,7 +30,7 @@ function updateParams_Song02() {
     device.parametersById.get("pink_gain").value = 0.0001;
 
     // b01
-    device.parametersById.get("b01/gain").value = 0.10;
+    device.parametersById.get("b01/gain").value = 0.07;
     device.parametersById.get("b01/lpf").value = 4000;
     device.parametersById.get("b01/hpf").value = 80;
     device.parametersById.get("b01/pan").value = 0.50;

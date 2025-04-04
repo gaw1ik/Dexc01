@@ -171,7 +171,7 @@ function updateParams_Song03() {
     device.parametersById.get("ms08/tune").value = TUNE;
 
     // ps01
-    device.parametersById.get("ps01/gain").value = 0.08;
+    device.parametersById.get("ps01/gain").value = 0.06;
     device.parametersById.get("ps01/oct").value = 0.5;
     device.parametersById.get("ps01/attack").value = 2;
     device.parametersById.get("ps01/decay").value = 8000;

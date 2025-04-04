@@ -138,7 +138,7 @@ function updateParams_Song01() {
     device.parametersById.get("ms04/tune").value = TUNE;
 
     // ms06 (triangle)
-    device.parametersById.get("ms06/gain").value = 0.016;
+    device.parametersById.get("ms06/gain").value = 0.010;
     device.parametersById.get("ms06/osc").value = 1;
     device.parametersById.get("ms06/attack").value = 1;
     device.parametersById.get("ms06/decay").value = 300;
